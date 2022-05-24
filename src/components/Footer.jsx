@@ -1,15 +1,20 @@
 import { Button } from 'semantic-ui-react'
 import * as Styled from './Footer.styles'
 
-const Footer = ({food}) => {
+const Footer = ({food, addInList, list, setNavigation}) => {
 
   const onClickAdd = () => {
-    console.log('Adicionado');
+    addInList(food)
   }
 
   return <Styled.Wrapper>
-   {food && <>
+   {food ? <>
     <Button primary onClick={onClickAdd}>Adicionar</Button>
+   </> : <>
+    {/* {list.map((food) => <>
+      {food.title}
+    </>)} */}
+    Itens adicionados ({list.length})
    </>}
   </Styled.Wrapper>
 }

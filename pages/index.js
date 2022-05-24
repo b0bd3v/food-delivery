@@ -5,18 +5,30 @@ import Header from '../src/components/Header'
 import Footer from '../src/components/Footer'
 import FoodList from '../src/components/FoodList'
 import FoodDetails from '../src/components/FoodDetails'
+import Checkout from '../src/components/Checkout'
+import Success from '../src/components/Success'
+
 import 'semantic-ui-css/semantic.min.css'
 
 import foods from "../mock/foods.json"
 
 export default function Home() {
   const [current, setCurrent] = useState(null)
-  const [list, setList] = useState(null)
+  const [list, setList] = useState([])
+  const [navigation, setNavigation] = useState('list')
+
+  const addInList = (item) => {
+    setList([item, ...list])
+    setNavigation('checkout')
+  }
 
   useEffect(() => {
     
   }, [current])
 
+  useEffect(() => {
+    setCurrent(null)
+  }, [list])
 
   return (
     <div>
@@ -27,11 +39,14 @@ export default function Home() {
 
       <Header title={'Menu'} />
       <main>
-        {current ? <FoodDetails /> : <FoodList foods={foods} selectFood={setCurrent} />}
+        {navigation == 'list' && <FoodList foods={foods} selectFood={setCurrent} setNavigation={setNavigation} />}
+        {navigation == 'item' && <FoodDetails food={current} setNavigation={setNavigation} />}
+        {navigation == 'checkout' && <Checkout setNavigation={setNavigation} /> }
+        {navigation == 'payment' && <Success setNavigation={setNavigation} /> }
       </main> 
 
       <footer>
-          <Footer food={current} />
+          <Footer food={current} list={list} addInList={addInList} setNavigation={setNavigation}/>
       </footer>
     </div>
   )
