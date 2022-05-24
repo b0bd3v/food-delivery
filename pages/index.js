@@ -1,9 +1,23 @@
+import { useState, useEffect } from 'react'
+
 import Head from 'next/head'
 import Header from '../src/components/Header'
 import Footer from '../src/components/Footer'
 import FoodList from '../src/components/FoodList'
+import FoodDetails from '../src/components/FoodDetails'
+import 'semantic-ui-css/semantic.min.css'
+
+import foods from "../mock/foods.json"
 
 export default function Home() {
+  const [current, setCurrent] = useState(null)
+  const [list, setList] = useState(null)
+
+  useEffect(() => {
+    
+  }, [current])
+
+
   return (
     <div>
       <Head>
@@ -13,11 +27,11 @@ export default function Home() {
 
       <Header title={'Menu'} />
       <main>
-        <FoodList />
+        {current ? <FoodDetails /> : <FoodList foods={foods} selectFood={setCurrent} />}
       </main> 
 
       <footer>
-          <Footer />
+          <Footer food={current} />
       </footer>
     </div>
   )

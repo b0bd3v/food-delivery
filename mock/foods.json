@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Hamburgão",
+    "image": "http://localhost:3000/images/hamburguer.jpg",
+    "description": "Saboroso hamburguer com carne de equídeos",
+    "price": 32.33
+  },
+  {
+    "title": "Pizza",
+    "image": "http://localhost:3000/images/pizza.jpg",
+    "description": "Pizza Calabresa",
+    "price": 232.21
+  }
+]
